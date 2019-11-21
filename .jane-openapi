@@ -2,8 +2,9 @@
 
 return [
     'openapi-file' => 'https://mega-beta.mautic.com/openapi.json',
-    'namespace' => 'MauticInc\\MEGA\\OpenAPI',
-    'directory' => __DIR__.'/src',
+    'namespace' => 'MauticInc\\MEGA\\OpenAPI\\Generated',
+    'directory' => __DIR__.'/generated',
     'client' => 'httplug',
-    'date-format' => 'Y-m-d\TH:i:s\Z'
+    'date-format' => 'Y-m-d\TH:i:s\Z',
+    'strict' => false
 ];
