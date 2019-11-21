@@ -18,7 +18,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "MauticInc\\\\MEGA\\\\OpenAPI\\": "src/"
+            "MauticInc\\MEGA\\OpenAPI\\": "src/"
         }
     }
 }
