@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace MauticInc\MEGA\OpenAPI;
 
-class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
+class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
 {
     /**
      * Get an location object.
@@ -57,16 +57,16 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
     public static function create($httpClient = null)
     {
         if (null === $httpClient) {
-            $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
+            $httpClient = \Http\Discovery\HttpClientDiscovery::find();
             $plugins = [];
-            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('/{computed_url}/openapi');
+            $uri = \Http\Discovery\UriFactoryDiscovery::find()->createUri('/{computed_url}/openapi');
             $plugins[] = new \Http\Client\Common\Plugin\AddPathPlugin($uri);
             $httpClient = new \Http\Client\Common\PluginClient($httpClient, $plugins);
         }
-        $requestFactory = \Http\Discovery\Psr17FactoryDiscovery::findRequestFactory();
-        $streamFactory = \Http\Discovery\Psr17FactoryDiscovery::findStreamFactory();
+        $messageFactory = \Http\Discovery\MessageFactoryDiscovery::find();
+        $streamFactory = \Http\Discovery\StreamFactoryDiscovery::find();
         $serializer = new \Symfony\Component\Serializer\Serializer(\MauticInc\MEGA\OpenAPI\Normalizer\NormalizerFactory::create(), [new \Symfony\Component\Serializer\Encoder\JsonEncoder(new \Symfony\Component\Serializer\Encoder\JsonEncode(), new \Symfony\Component\Serializer\Encoder\JsonDecode())]);
 
-        return new static($httpClient, $requestFactory, $serializer, $streamFactory);
+        return new static($httpClient, $messageFactory, $serializer, $streamFactory);
     }
 }

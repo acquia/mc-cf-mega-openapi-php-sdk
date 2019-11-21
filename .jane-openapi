@@ -4,6 +4,6 @@ return [
     'openapi-file' => 'https://mega-beta.mautic.com/openapi.json',
     'namespace' => 'MauticInc\\MEGA\\OpenAPI',
     'directory' => __DIR__.'/src',
-    'client' => 'psr18',
+    'client' => 'httplug',
     'date-format' => 'Y-m-d\TH:i:s\Z'
 ];
