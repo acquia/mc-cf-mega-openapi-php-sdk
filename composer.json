@@ -3,10 +3,10 @@
     "description": "MEGA OpenAPI PHP SDK",
     "type": "library",
     "require": {
-      "php": "~7.2"
+      "php": "~7.2",
+      "jane-php/open-api": "^5.2"
     },
     "require-dev": {
-        "jane-php/open-api": "^5.2",
         "friendsofphp/php-cs-fixer": "^2.16"
     },
     "license": "MIT",
