@@ -1,0 +1,24 @@
+{
+    "name": "mautic-inc/mega-openapi-php-sdk",
+    "description": "MEGA OpenAPI PHP SDK",
+    "type": "library",
+    "require": {
+      "php": "~7.2"
+    },
+    "require-dev": {
+        "jane-php/open-api": "^5.2",
+        "friendsofphp/php-cs-fixer": "^2.16"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Don Gilbert",
+            "email": "don@dongilbert.net"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "MauticInc\\\\MEGA\\\\OpenAPI\\": "src/"
+        }
+    }
+}
