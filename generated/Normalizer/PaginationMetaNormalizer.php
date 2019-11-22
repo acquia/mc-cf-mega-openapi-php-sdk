@@ -39,25 +39,25 @@ class PaginationMetaNormalizer implements DenormalizerInterface, NormalizerInter
         }
         $object = new \MauticInc\MEGA\OpenAPI\Generated\Model\PaginationMeta();
         if (property_exists($data, 'current_page') && $data->{'current_page'} !== null) {
-            $object->setCurrentPage($data->{'current_page'});
+            $object->setCurrentPage((int) $data->{'current_page'});
         }
         if (property_exists($data, 'from') && $data->{'from'} !== null) {
-            $object->setFrom($data->{'from'});
+            $object->setFrom((int) $data->{'from'});
         }
         if (property_exists($data, 'last_page') && $data->{'last_page'} !== null) {
-            $object->setLastPage($data->{'last_page'});
+            $object->setLastPage((int) $data->{'last_page'});
         }
         if (property_exists($data, 'path') && $data->{'path'} !== null) {
             $object->setPath($data->{'path'});
         }
         if (property_exists($data, 'per_page') && $data->{'per_page'} !== null) {
-            $object->setPerPage($data->{'per_page'});
+            $object->setPerPage((int) $data->{'per_page'});
         }
         if (property_exists($data, 'to') && $data->{'to'} !== null) {
-            $object->setTo($data->{'to'});
+            $object->setTo((int) $data->{'to'});
         }
         if (property_exists($data, 'total') && $data->{'total'} !== null) {
-            $object->setTotal($data->{'total'});
+            $object->setTotal((int) $data->{'total'});
         }
 
         return $object;

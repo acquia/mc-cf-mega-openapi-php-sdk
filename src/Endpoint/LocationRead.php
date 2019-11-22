@@ -13,6 +13,11 @@ class LocationRead extends BaseEndpoint
         $this->bearerToken = $token;
     }
 
+    public function getUri(): string
+    {
+        return str_replace(['{location}'], [$this->location], '/openapi/locations/{location}/instances');
+    }
+
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json'], 'Authorization' => sprintf('Bearer %s', $this->bearerToken)];
