@@ -15,7 +15,7 @@ class LocationRead extends BaseEndpoint
 
     public function getUri(): string
     {
-        return str_replace(['{location}'], [$this->location], '/openapi/locations/{location}/instances');
+        return str_replace(['{location}'], [$this->location], '/openapi/locations/{location}');
     }
 
     public function getExtraHeaders(): array
