@@ -15,7 +15,7 @@ class LocationInstanceBrowse extends \Jane\OpenApiRuntime\Client\BaseEndpoint im
     protected $location;
 
     /**
-     * Fetch a list of instances on anlocationt.
+     * Fetch a list of instances on in a location.
      *
      * @param string $location        UUID of the location to operate on
      * @param array  $queryParameters {

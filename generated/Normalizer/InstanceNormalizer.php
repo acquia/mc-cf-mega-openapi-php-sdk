@@ -59,11 +59,26 @@ class InstanceNormalizer implements DenormalizerInterface, NormalizerInterface, 
         if (property_exists($data, 'custom_domain') && $data->{'custom_domain'} !== null) {
             $object->setCustomDomain($data->{'custom_domain'});
         }
+        if (property_exists($data, 'location_cname') && $data->{'location_cname'} !== null) {
+            $object->setLocationCname($data->{'location_cname'});
+        }
+        if (property_exists($data, 'db_name') && $data->{'db_name'} !== null) {
+            $object->setDbName($data->{'db_name'});
+        }
+        if (property_exists($data, 'db_host') && $data->{'db_host'} !== null) {
+            $object->setDbHost($data->{'db_host'});
+        }
+        if (property_exists($data, 'plan_name') && $data->{'plan_name'} !== null) {
+            $object->setPlanName($data->{'plan_name'});
+        }
+        if (property_exists($data, 'trial_expiration') && $data->{'trial_expiration'} !== null) {
+            $object->setTrialExpiration(\DateTime::createFromFormat("Y-m-d\TH:i:s\Z", $data->{'trial_expiration'}));
+        }
+        if (property_exists($data, 'user_email') && $data->{'user_email'} !== null) {
+            $object->setUserEmail($data->{'user_email'});
+        }
         if (property_exists($data, 'location_uuid') && $data->{'location_uuid'} !== null) {
             $object->setLocationUuid($data->{'location_uuid'});
-        }
-        if (property_exists($data, 'account_uuid') && $data->{'account_uuid'} !== null) {
-            $object->setAccountUuid($data->{'account_uuid'});
         }
         if (property_exists($data, '_links') && $data->{'_links'} !== null) {
             $values = [];
@@ -100,11 +115,26 @@ class InstanceNormalizer implements DenormalizerInterface, NormalizerInterface, 
         if (null !== $object->getCustomDomain()) {
             $data->{'custom_domain'} = $object->getCustomDomain();
         }
+        if (null !== $object->getLocationCname()) {
+            $data->{'location_cname'} = $object->getLocationCname();
+        }
+        if (null !== $object->getDbName()) {
+            $data->{'db_name'} = $object->getDbName();
+        }
+        if (null !== $object->getDbHost()) {
+            $data->{'db_host'} = $object->getDbHost();
+        }
+        if (null !== $object->getPlanName()) {
+            $data->{'plan_name'} = $object->getPlanName();
+        }
+        if (null !== $object->getTrialExpiration()) {
+            $data->{'trial_expiration'} = $object->getTrialExpiration()->format("Y-m-d\TH:i:s\Z");
+        }
+        if (null !== $object->getUserEmail()) {
+            $data->{'user_email'} = $object->getUserEmail();
+        }
         if (null !== $object->getLocationUuid()) {
             $data->{'location_uuid'} = $object->getLocationUuid();
-        }
-        if (null !== $object->getAccountUuid()) {
-            $data->{'account_uuid'} = $object->getAccountUuid();
         }
         if (null !== $object->getLinks()) {
             $values = [];

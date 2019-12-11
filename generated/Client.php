@@ -13,7 +13,7 @@ namespace MauticInc\MEGA\OpenAPI\Generated;
 class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
 {
     /**
-     * Get an location object.
+     * Get a location object.
      *
      * @param string $location UUID of the location to operate on
      * @param string $fetch    Fetch mode to use (can be OBJECT or RESPONSE)
@@ -31,7 +31,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     }
 
     /**
-     * Fetch a list of instances on anlocationt.
+     * Fetch a list of instances on in a location.
      *
      * @param string $location        UUID of the location to operate on
      * @param array  $queryParameters {
@@ -52,6 +52,24 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
     public function locationInstanceBrowse(string $location, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executePsr7Endpoint(new \MauticInc\MEGA\OpenAPI\Generated\Endpoint\LocationInstanceBrowse($location, $queryParameters), $fetch);
+    }
+
+    /**
+     * Get an instance object.
+     *
+     * @param string $instance UUID of the instance to operate on
+     * @param string $fetch    Fetch mode to use (can be OBJECT or RESPONSE)
+     *
+     * @throws \MauticInc\MEGA\OpenAPI\Generated\Exception\InstanceReadUnauthorizedException
+     * @throws \MauticInc\MEGA\OpenAPI\Generated\Exception\InstanceReadForbiddenException
+     * @throws \MauticInc\MEGA\OpenAPI\Generated\Exception\InstanceReadNotFoundException
+     * @throws \MauticInc\MEGA\OpenAPI\Generated\Exception\InstanceReadTooManyRequestsException
+     *
+     * @return \MauticInc\MEGA\OpenAPI\Generated\Model\ResponseInstance|\Psr\Http\Message\ResponseInterface|null
+     */
+    public function instanceRead(string $instance, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executePsr7Endpoint(new \MauticInc\MEGA\OpenAPI\Generated\Endpoint\InstanceRead($instance), $fetch);
     }
 
     public static function create($httpClient = null)

@@ -15,7 +15,7 @@ class LocationRead extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \
     protected $location;
 
     /**
-     * Get an location object.
+     * Get a location object.
      *
      * @param string $location UUID of the location to operate on
      */

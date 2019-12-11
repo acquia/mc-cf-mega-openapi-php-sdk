@@ -41,17 +41,35 @@ class Instance
      */
     protected $customDomain;
     /**
-     * A UUID for a location to which you can deploy. Get available values via /api/locations.
+     * @var string|null
+     */
+    protected $locationCname;
+    /**
+     * @var string|null
+     */
+    protected $dbName;
+    /**
+     * @var string|null
+     */
+    protected $dbHost;
+    /**
+     * @var string|null
+     */
+    protected $planName;
+    /**
+     * @var \DateTime|null
+     */
+    protected $trialExpiration;
+    /**
+     * @var string|null
+     */
+    protected $userEmail;
+    /**
+     * The UUID for the location to which the instance is deployed.
      *
      * @var string|null
      */
     protected $locationUuid;
-    /**
-     * A UUID for an account to which you have access. Get available values via /api/accounts.
-     *
-     * @var string|null
-     */
-    protected $accountUuid;
     /**
      * @var RelLink[]|null
      */
@@ -141,8 +159,80 @@ class Instance
         return $this;
     }
 
+    public function getLocationCname(): ?string
+    {
+        return $this->locationCname;
+    }
+
+    public function setLocationCname(?string $locationCname): self
+    {
+        $this->locationCname = $locationCname;
+
+        return $this;
+    }
+
+    public function getDbName(): ?string
+    {
+        return $this->dbName;
+    }
+
+    public function setDbName(?string $dbName): self
+    {
+        $this->dbName = $dbName;
+
+        return $this;
+    }
+
+    public function getDbHost(): ?string
+    {
+        return $this->dbHost;
+    }
+
+    public function setDbHost(?string $dbHost): self
+    {
+        $this->dbHost = $dbHost;
+
+        return $this;
+    }
+
+    public function getPlanName(): ?string
+    {
+        return $this->planName;
+    }
+
+    public function setPlanName(?string $planName): self
+    {
+        $this->planName = $planName;
+
+        return $this;
+    }
+
+    public function getTrialExpiration(): ?\DateTime
+    {
+        return $this->trialExpiration;
+    }
+
+    public function setTrialExpiration(?\DateTime $trialExpiration): self
+    {
+        $this->trialExpiration = $trialExpiration;
+
+        return $this;
+    }
+
+    public function getUserEmail(): ?string
+    {
+        return $this->userEmail;
+    }
+
+    public function setUserEmail(?string $userEmail): self
+    {
+        $this->userEmail = $userEmail;
+
+        return $this;
+    }
+
     /**
-     * A UUID for a location to which you can deploy. Get available values via /api/locations.
+     * The UUID for the location to which the instance is deployed.
      */
     public function getLocationUuid(): ?string
     {
@@ -150,29 +240,11 @@ class Instance
     }
 
     /**
-     * A UUID for a location to which you can deploy. Get available values via /api/locations.
+     * The UUID for the location to which the instance is deployed.
      */
     public function setLocationUuid(?string $locationUuid): self
     {
         $this->locationUuid = $locationUuid;
-
-        return $this;
-    }
-
-    /**
-     * A UUID for an account to which you have access. Get available values via /api/accounts.
-     */
-    public function getAccountUuid(): ?string
-    {
-        return $this->accountUuid;
-    }
-
-    /**
-     * A UUID for an account to which you have access. Get available values via /api/accounts.
-     */
-    public function setAccountUuid(?string $accountUuid): self
-    {
-        $this->accountUuid = $accountUuid;
 
         return $this;
     }
