@@ -1,0 +1,15 @@
+openapi: 3.0.1
+info:
+  title: Openapi PHP SDK
+  description: PHP SDK for MEGA's OpenAPI
+  x-cortex-tag: acquia/mc-cf-mega-openapi-php-sdk
+  x-cortex-git:
+    github:
+      repository: acquia/mc-cf-mega-openapi-php-sdk
+  x-cortex-owners:
+    - type: GROUP
+      name: acquia/mc-cf-team
+    - type: SLACK
+      channel: mc-csf-engineering
+  x-cortex-groups:
+    - marketing-cloud
