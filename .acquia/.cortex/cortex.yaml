@@ -9,7 +9,11 @@ info:
   x-cortex-owners:
     - type: GROUP
       name: acquia/mc-cf-team
+      provider: GITHUB
+      description: This team is responsible for development and code review of campaign factory related PRs
     - type: SLACK
       channel: mc-csf-engineering
+      notificationsEnabled: true
+      description: This channel is used for notify updates, team help, technical discussions
   x-cortex-groups:
     - marketing-cloud
