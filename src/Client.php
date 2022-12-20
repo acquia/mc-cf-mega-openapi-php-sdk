@@ -90,7 +90,9 @@ class Client extends BaseClient
         $serializers = NormalizerFactory::create();
         $serializers[] = new ResponseOAuthClientCredentialsNormalizer();
 
-        $serializer = new Serializer($serializers, [new JsonEncoder(new JsonEncode(), new JsonDecode())]);
+        $serializer = new Serializer($serializers, [new JsonEncoder(new JsonEncode(), new JsonDecode(), [
+            JsonDecode::ASSOCIATIVE => false,
+        ])]);
 
         return new static($httpClient, $messageFactory, $serializer, $streamFactory);
     }
