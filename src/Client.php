@@ -71,27 +71,31 @@ class Client extends BaseClient
 
     /**
      * @param null $httpClient
-     * @param string $baseUri
+     * @param array $additionalPlugins
+     * @param array $additionalNormalizers
+     * @param string|null $baseUri
      * @return BaseClient|static
      */
-    public static function create($httpClient = null, string $baseUri = null)
+    public static function create($httpClient = null, array $additionalPlugins = array(), array $additionalNormalizers = array(), string $baseUri = null)
     {
         if (null === $httpClient) {
-            $httpClient = HttpClientDiscovery::find();
+            $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
             $plugins = [];
-            $uri = UriFactoryDiscovery::find()->createUri($baseUri ?? 'https://mega-beta.mautic.com');
-            $plugins[] = new AddHostPlugin($uri);
-            $plugins[] = new AddPathPlugin($uri);
-            $httpClient = new PluginClient($httpClient, $plugins);
+            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri($baseUri ?? 'https://mega-beta.mautic.com');
+            $plugins[] = new \Http\Client\Common\Plugin\AddHostPlugin($uri);
+            $plugins[] = new \Http\Client\Common\Plugin\AddPathPlugin($uri);
+            if (count($additionalPlugins) > 0) {
+                $plugins = array_merge($plugins, $additionalPlugins);
+            }
+            $httpClient = new \Http\Client\Common\PluginClient($httpClient, $plugins);
         }
-
-        $messageFactory = MessageFactoryDiscovery::find();
-        $streamFactory = StreamFactoryDiscovery::find();
-        $serializers = NormalizerFactory::create();
-        $serializers[] = new ResponseOAuthClientCredentialsNormalizer();
-
-        $serializer = new Serializer($serializers, [new JsonEncoder(new JsonEncode(), new JsonDecode())]);
-
-        return new static($httpClient, $messageFactory, $serializer, $streamFactory);
+        $requestFactory = \Http\Discovery\Psr17FactoryDiscovery::findRequestFactory();
+        $streamFactory = \Http\Discovery\Psr17FactoryDiscovery::findStreamFactory();
+        $normalizers = array(new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new \MauticInc\MEGA\OpenAPI\Generated\Normalizer\JaneObjectNormalizer());
+        if (count($additionalNormalizers) > 0) {
+            $normalizers = array_merge($normalizers, $additionalNormalizers);
+        }
+        $serializer = new \Symfony\Component\Serializer\Serializer($normalizers, array(new \Symfony\Component\Serializer\Encoder\JsonEncoder(new \Symfony\Component\Serializer\Encoder\JsonEncode(), new \Symfony\Component\Serializer\Encoder\JsonDecode(array('json_decode_associative' => true)))));
+        return new static($httpClient, $requestFactory, $serializer, $streamFactory);
     }
 }
