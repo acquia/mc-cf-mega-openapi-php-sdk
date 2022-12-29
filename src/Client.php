@@ -31,8 +31,7 @@ class Client extends BaseClient
     public function authorize(string $clientId, string $clientSecret): void
     {
         /** @var ResponseOAuthClientCredentials $response */
-        $response = $this->executePsr7Endpoint(new OAuthToken($clientId, $clientSecret));
-
+        $response = $this->executeEndpoint(new OAuthToken($clientId, $clientSecret));
         $this->bearerToken = $response->getAccessToken();
     }
 
@@ -44,7 +43,7 @@ class Client extends BaseClient
         $endpoint = new LocationRead($location);
         $endpoint->setBearerToken($this->bearerToken);
 
-        return $this->executePsr7Endpoint($endpoint, $fetch);
+        return $this->executeEndpoint($endpoint, $fetch);
     }
 
     /**
@@ -55,7 +54,7 @@ class Client extends BaseClient
         $endpoint = new LocationInstanceBrowse($location, $queryParameters);
         $endpoint->setBearerToken($this->bearerToken);
 
-        return $this->executePsr7Endpoint($endpoint, $fetch);
+        return $this->executeEndpoint($endpoint, $fetch);
     }
 
     /**
@@ -66,7 +65,7 @@ class Client extends BaseClient
         $endpoint = new InstanceRead($instance);
         $endpoint->setBearerToken($this->bearerToken);
 
-        return $this->executePsr7Endpoint($endpoint, $fetch);
+        return $this->executeEndpoint($endpoint, $fetch);
     }
 
     /**

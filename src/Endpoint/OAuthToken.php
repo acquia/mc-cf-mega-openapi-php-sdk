@@ -2,15 +2,15 @@
 
 namespace MauticInc\MEGA\OpenAPI\Endpoint;
 
-use Jane\OpenApiRuntime\Client\BaseEndpoint;
-use Jane\OpenApiRuntime\Client\Psr7Endpoint;
-use Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+use MauticInc\MEGA\OpenAPI\Generated\Runtime\Client\Client;
+use MauticInc\MEGA\OpenAPI\Generated\Runtime\Client\EndpointTrait;
 use MauticInc\MEGA\OpenAPI\Model\ResponseOAuthClientCredentials;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
-class OAuthToken extends BaseEndpoint implements Psr7Endpoint
+class OAuthToken extends \MauticInc\MEGA\OpenAPI\Generated\Runtime\Client\BaseEndpoint implements \MauticInc\MEGA\OpenAPI\Generated\Runtime\Client\Endpoint
 {
-    use Psr7EndpointTrait;
+    use EndpointTrait;
 
     private $clientId;
 
@@ -63,5 +63,10 @@ class OAuthToken extends BaseEndpoint implements Psr7Endpoint
         if (200 === $status && mb_strpos($contentType, 'application/json') !== false) {
             return $serializer->deserialize($body, ResponseOAuthClientCredentials::class, 'json');
         }
+    }
+
+    public function getAuthenticationScopes() : array
+    {
+        return array('OAuth2');
     }
 }
