@@ -94,7 +94,14 @@ class Client extends BaseClient
         if (count($additionalNormalizers) > 0) {
             $normalizers = array_merge($normalizers, $additionalNormalizers);
         }
-        $serializer = new \Symfony\Component\Serializer\Serializer($normalizers, array(new \Symfony\Component\Serializer\Encoder\JsonEncoder(new \Symfony\Component\Serializer\Encoder\JsonEncode(), new \Symfony\Component\Serializer\Encoder\JsonDecode(array('json_decode_associative' => true)))));
+        $normalizers[] = new ResponseOAuthClientCredentialsNormalizer();
+
+        $serializer = new \Symfony\Component\Serializer\Serializer($normalizers, array(
+            new \Symfony\Component\Serializer\Encoder\JsonEncoder(
+                new \Symfony\Component\Serializer\Encoder\JsonEncode(),
+                new \Symfony\Component\Serializer\Encoder\JsonDecode(array('json_decode_associative' => false))
+            )
+        ));
         return new static($httpClient, $requestFactory, $serializer, $streamFactory);
     }
 }
