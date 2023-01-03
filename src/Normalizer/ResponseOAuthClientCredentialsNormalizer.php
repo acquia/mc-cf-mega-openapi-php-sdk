@@ -27,26 +27,36 @@ class ResponseOAuthClientCredentialsNormalizer implements DenormalizerInterface,
 
     public function denormalize($data, $class, $format = null, array $context = [])
     {
-        if (!is_object($data)) {
-            return null;
-        }
-
         $object = new ResponseOAuthClientCredentials();
 
-        if (property_exists($data, 'token_type') && $data->token_type !== null) {
-            $object->setTokenType($data->token_type);
+        if (null === $data || false === \is_array($data)) {
+            return $object;
         }
 
-        if (property_exists($data, 'expires_in') && $data->expires_in !== null) {
-            $object->setExpiresIn($data->expires_in);
+        if (\array_key_exists('token_type', $data) && $data['token_type'] !== null) {
+            $object->setTokenType($data['token_type']);
+            unset($data['token_type']);
         }
 
-        if (property_exists($data, 'access_token') && $data->access_token !== null) {
-            $object->setAccessToken($data->access_token);
+        if (\array_key_exists('expires_in', $data) && $data['expires_in'] !== null) {
+            $object->setExpiresIn($data['expires_in']);
+            unset($data['expires_in']);
         }
 
-        if (property_exists($data, 'refresh_token') && $data->refresh_token !== null) {
-            $object->setRefreshToken($data->refresh_token);
+        if (\array_key_exists('access_token', $data) && $data['access_token'] !== null) {
+            $object->setAccessToken($data['access_token']);
+            unset($data['access_token']);
+        }
+
+        if (\array_key_exists('refresh_token', $data) && $data['refresh_token'] !== null) {
+            $object->setRefreshToken($data['refresh_token']);
+            unset($data['refresh_token']);
+        }
+
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value;
+            }
         }
 
         return $object;
@@ -54,20 +64,16 @@ class ResponseOAuthClientCredentialsNormalizer implements DenormalizerInterface,
 
     public function normalize($object, $format = null, array $context = [])
     {
-        $data = new \stdClass();
-        if (null !== $object->getTokenType()) {
-            $data->token_type = $object->getTokenType();
+        $data = array();
+        $data['token_type'] = $object->getTokenType();
+        $data['expires_in'] = $object->getExpiresIn();
+        $data['access_token'] = $object->getAccessToken();
+        $data['refresh_token'] = $object->getRefreshToken();
+        foreach ($object as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value;
+            }
         }
-        if (null !== $object->getExpiresIn()) {
-            $data->expires_in = $object->getExpiresIn();
-        }
-        if (null !== $object->getAccessToken()) {
-            $data->access_token = $object->getAccessToken();
-        }
-        if (null !== $object->getRefreshToken()) {
-            $data->refres_token = $object->getRefreshToken();
-        }
-
         return $data;
     }
 }

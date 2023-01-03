@@ -90,11 +90,11 @@ class Client extends BaseClient
         }
         $requestFactory = \Http\Discovery\Psr17FactoryDiscovery::findRequestFactory();
         $streamFactory = \Http\Discovery\Psr17FactoryDiscovery::findStreamFactory();
+        $additionalNormalizers[] = new ResponseOAuthClientCredentialsNormalizer();
         $normalizers = array(new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new \MauticInc\MEGA\OpenAPI\Generated\Normalizer\JaneObjectNormalizer());
         if (count($additionalNormalizers) > 0) {
             $normalizers = array_merge($normalizers, $additionalNormalizers);
         }
-        $normalizers[] = new ResponseOAuthClientCredentialsNormalizer();
 
         $serializer = new \Symfony\Component\Serializer\Serializer($normalizers, array(
             new \Symfony\Component\Serializer\Encoder\JsonEncoder(
