@@ -2,20 +2,15 @@
 
 namespace MauticInc\MEGA\OpenAPI\Endpoint;
 
-use MauticInc\MEGA\OpenAPI\Generated\Endpoint\LocationInstanceBrowse as BaseEndpoint;
+use MauticInc\MEGA\OpenAPI\Generated\Endpoint\BrowseLocationInstances as BaseEndpoint;
 
-class LocationInstanceBrowse extends BaseEndpoint
+class BrowseLocationInstances extends BaseEndpoint
 {
     private $bearerToken;
 
     public function setBearerToken(string $token)
     {
         $this->bearerToken = $token;
-    }
-
-    public function getUri(): string
-    {
-        return str_replace(['{location}'], [$this->location], '/openapi/locations/{location}/instances');
     }
 
     public function getExtraHeaders(): array

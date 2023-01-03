@@ -9,6 +9,7 @@ use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Discovery\StreamFactoryDiscovery;
 use Http\Discovery\UriFactoryDiscovery;
+use MauticInc\MEGA\OpenAPI\Endpoint\BrowseLocationInstances;
 use MauticInc\MEGA\OpenAPI\Endpoint\InstanceRead;
 use MauticInc\MEGA\OpenAPI\Endpoint\LocationInstanceBrowse;
 use MauticInc\MEGA\OpenAPI\Endpoint\LocationRead;
@@ -51,7 +52,7 @@ class Client extends BaseClient
      */
     public function locationInstanceBrowse(string $location, array $queryParameters = [], string $fetch = self::FETCH_OBJECT): ResponseArrayOfInstances
     {
-        $endpoint = new LocationInstanceBrowse($location, $queryParameters);
+        $endpoint = new BrowseLocationInstances($location, $queryParameters);
         $endpoint->setBearerToken($this->bearerToken);
 
         return $this->executeEndpoint($endpoint, $fetch);
