@@ -13,6 +13,11 @@ class BrowseLocationInstances extends BaseEndpoint
         $this->bearerToken = $token;
     }
 
+    public function getUri(): string
+    {
+        return str_replace(['{uuid}'], [$this->location], '/openapi/locations/{uuid}/instances');
+    }
+
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json'], 'Authorization' => sprintf('Bearer %s', $this->bearerToken)];
