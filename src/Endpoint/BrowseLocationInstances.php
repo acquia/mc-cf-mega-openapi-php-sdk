@@ -16,7 +16,7 @@ class BrowseLocationInstances extends BaseEndpoint
 
     public function getUri(): string
     {
-        return str_replace(['{uuid}'], [$this->location], '/openapi/locations/{uuid}/instances');
+        return str_replace(['{uuid}'], [$this->uuid], '/openapi/locations/{uuid}/instances');
     }
 
     public function getExtraHeaders(): array
