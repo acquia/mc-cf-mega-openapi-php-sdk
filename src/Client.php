@@ -52,7 +52,7 @@ class Client extends BaseClient
      */
     public function locationInstanceBrowse(string $location, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        $endpoint = new BrowseLocationInstan($location, $queryParameters);
+        $endpoint = new BrowseLocationInstances($location, $queryParameters);
         $endpoint->setBearerToken($this->bearerToken);
 
         return $this->executeEndpoint($endpoint, $fetch);
