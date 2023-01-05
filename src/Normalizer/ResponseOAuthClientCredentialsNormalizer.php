@@ -53,12 +53,6 @@ class ResponseOAuthClientCredentialsNormalizer implements DenormalizerInterface,
             unset($data['refresh_token']);
         }
 
-        foreach ($data as $key => $value) {
-            if (preg_match('/.*/', (string) $key)) {
-                $object[$key] = $value;
-            }
-        }
-
         return $object;
     }
 
@@ -69,11 +63,7 @@ class ResponseOAuthClientCredentialsNormalizer implements DenormalizerInterface,
         $data['expires_in'] = $object->getExpiresIn();
         $data['access_token'] = $object->getAccessToken();
         $data['refresh_token'] = $object->getRefreshToken();
-        foreach ($object as $key => $value) {
-            if (preg_match('/.*/', (string) $key)) {
-                $data[$key] = $value;
-            }
-        }
+
         return $data;
     }
 }
