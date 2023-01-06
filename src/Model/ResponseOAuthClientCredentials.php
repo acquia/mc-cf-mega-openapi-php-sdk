@@ -2,7 +2,7 @@
 
 namespace MauticInc\MEGA\OpenAPI\Model;
 
-class ResponseOAuthClientCredentials
+class ResponseOAuthClientCredentials extends \ArrayObject
 {
     /**
      * @var string
