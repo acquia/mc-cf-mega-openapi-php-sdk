@@ -36,7 +36,7 @@ class Client extends BaseClient
     /**
      * {@inheritDoc}
      */
-    public function locationRead(string $location, string $fetch = self::FETCH_OBJECT): ResponseInstance
+    public function locationRead(string $location, string $fetch = self::FETCH_OBJECT)
     {
         $endpoint = new LocationRead($location);
         $endpoint->setBearerToken($this->bearerToken);
